@@ -20,13 +20,13 @@ def display_board():
     print(board[3] +  " | " + board[4] + " | " + board[5])
     print(board[6] +  " | " + board[7] + " | " + board[8])
  
-# Play game   
+# Play game of tic-tac-toe  
 def play_game():
     
     # Display initial board
     display_board()
     
-    # While the game is still ongoing
+    # While the game is still going
     while game_still_going:
         
         #handle a signle turn of an arbituary player 
@@ -45,7 +45,7 @@ def play_game():
         print("Tie.")
         
 
-#handle turn 
+#handle turn of a arbituary player
 def handle_turn(player):  
     position = input("Choose a position from 1-9: ")
     position = int(position) - 1
@@ -56,15 +56,54 @@ def handle_turn(player):
   
   
 def check_if_game_over():
-    check_if_win()
+    check_for_winner()
     check_if_tie()
     
-def check_if_win():
+def check_for_winner():
+    
+    #set up global variables
+    global winner
+    
     #check rows
-    #check colums
+    row_winner = check_rows()
+    #check columns
+    coloumn_winner = check_coloumns()
     #check diagonals 
+    diagonal_winner = check_diagonals()
+    if row_winner:
+        winner = row_winner()
+    elif column_winner:
+        winner = coloumn_winner()
+    elif diagonal_winner:
+        winner = diagonal_winner()
+    else:
+        winner = None
     return
     
+def check_rows():
+    #setup global variables
+    global game_still_going
+    #check if any of the rows have the ame value
+    row_1 = board[0] == board[1] == board[2] != "-"
+    row_2 = board[3] == board[4] == board[5] != "-"
+    row_3 = board[6] == board[7] == board[8] != "-"
+    #If any row does have amtch, flash as win
+    if row_1 or row_2 or row_3:
+        game_still_going = False
+    if row_1:
+       return board[0]
+    elif row_2:
+       return board[3]
+    elif row_3:
+        return board[6]
+    return
+
+def check_coloumns():
+    return
+
+def check_diagonals():
+    return
+
 def check_if_tie():
     #check rows
     #check columns
@@ -79,7 +118,6 @@ play_game()
 
 
 #0.26S
-
 
 
 
