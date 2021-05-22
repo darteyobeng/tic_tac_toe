@@ -190,3 +190,4 @@ play_game()
     #check diagonals
 #check tie
 #flip player
+# testing my strength  
